@@ -15,7 +15,7 @@ export const listCourses = async (
 
     res.json({ message: "Courses retrieved successfully", data: courses });
   } catch (error) {
-    res.status(500).send({ message: "Error retrieving courses list" });
+    res.status(500).send({ message: "Error retrieving courses list", error });
   }
 };
 
@@ -31,7 +31,7 @@ export const getCourse = async (req: Request, res: Response): Promise<void> => {
 
     res.json({ message: "Course retrieved successfully", data: course });
   } catch (error) {
-    res.status(500).send({ message: "Error retrieving course" });
+    res.status(500).send({ message: "Error retrieving course", error });
   }
 };
 
