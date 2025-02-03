@@ -36,6 +36,7 @@ const customBaseQuery = async (
       (args as FetchArgs).method && (args as FetchArgs).method !== "GET";
 
     if (isMutationRequest) {
+      // only show success message for mutations
       const successMessage = result.data?.message;
       if (successMessage) toast.success(successMessage);
     }
