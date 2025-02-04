@@ -24,6 +24,7 @@ const customBaseQuery = async (
     const result: any = await baseQuery(args, api, extraOptions);
 
     if (result.error) {
+      console.log(result.error);
       const errorData = result.error.data;
       const errorMessage =
         errorData?.message ||

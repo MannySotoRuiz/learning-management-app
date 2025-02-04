@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode, useState } from "react";
-import { usePathname } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 import { useUser } from "@clerk/nextjs";
@@ -19,6 +19,21 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
 
   if (!isLoaded) return <Loading />;
   if (!user) return <div>Please sing in to access this page.</div>;
+
+  if (
+    pathname.startsWith("/teacher") &&
+    user.publicMetadata.userType === "student"
+  ) {
+    const newPath = pathname.replace("/teacher", "/user");
+    redirect(newPath);
+  }
+  if (
+    pathname.startsWith("/user") &&
+    user.publicMetadata.userType === "teacher"
+  ) {
+    const newPath = pathname.replace("/user", "/teacher");
+    redirect(newPath);
+  }
 
   return (
     <SidebarProvider>
