@@ -13,13 +13,14 @@ import {
 // ROUTE IMPORTS
 import courseRoutes from "./routes/courseRoutes";
 import userClerkRoutes from "./routes/userClerkRoutes";
+import transactionRoutes from "./routes/transactionRoutes";
 
 /* CONFIGURATIONS */
 dotenv.config();
 const isProduction = process.env.NODE_ENV === "production";
-// if (!isProduction) {
-//   dynamoose.aws.ddb.local();
-// }
+if (!isProduction) {
+  dynamoose.aws.ddb.local();
+}
 
 export const clerkClient = createClerkClient({
   secretKey: process.env.CLERK_SECRET_KEY,
@@ -41,11 +42,16 @@ app.get("/", (req, res) => {
 });
 app.use("/courses", courseRoutes);
 app.use("/users/clerk", requireAuth(), userClerkRoutes);
+app.use("/transactions", requireAuth(), transactionRoutes);
 
 // SERVER
 const port = process.env.PORT || 3000;
 if (!isProduction) {
-  app.listen(port, () => {
+  app.listen(port, (err) => {
+    if (err) {
+      console.error(`Failed to start server: ${err}`);
+      return;
+    }
     console.log(`Server running on port ${port}`);
   });
 }
