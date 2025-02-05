@@ -1,10 +1,14 @@
 "use client";
 
+import React from "react";
+
+import { useUser } from "@clerk/nextjs";
+import { useCheckoutNavigation } from "@/hooks/use-checkout-navigation";
+
 import Loading from "@/components/loading";
 import { WizardStepper } from "@/components/marketing/wizard-stepper";
-import { useCheckoutNavigation } from "@/hooks/use-checkout-navigation";
-import { useUser } from "@clerk/nextjs";
-import React from "react";
+
+import PaymentPage from "./payment";
 import CheckoutDetailsPage from "./details";
 
 const CheckoutWizard = () => {
@@ -18,8 +22,7 @@ const CheckoutWizard = () => {
       case 1:
         return <CheckoutDetailsPage />;
       case 2:
-        return <div>Payment Page</div>;
-      // return <PaymentPage />;
+        return <PaymentPage />;
       case 3:
         return <div>Completion Page</div>;
       // return <CompletionPage />;
