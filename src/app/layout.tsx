@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
-import { DM_Sans } from "next/font/google";
 import "./globals.css";
-import { Providers } from "./providers";
-import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "sonner";
+import type { Metadata } from "next";
+import { Providers } from "./providers";
+import { DM_Sans } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en">
+      <html lang="en" className="dark">
         <body className={`${dmSans.className}`}>
           <Providers>
             <div className="root-layout">{children}</div>
