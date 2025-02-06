@@ -34,16 +34,24 @@ const PaymentPageContent = () => {
       return;
     }
 
-    const baseUrl = process.env.NEXT_PUBLIC_LOCAL_URL
-      ? `http://${process.env.NEXT_PUBLIC_LOCAL_URL}`
-      : process.env.NEXT_PUBLIC_VERCEL_URL
-      ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
-      : undefined;
+    // const baseUrl = process.env.NEXT_PUBLIC_LOCAL_URL
+    //   ? `http://${process.env.NEXT_PUBLIC_LOCAL_URL}`
+    //   : process.env.NEXT_PUBLIC_VERCEL_URL
+    //   ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+    //   : undefined;
+
+    // const result = await stripe.confirmPayment({
+    //   elements,
+    //   confirmParams: {
+    //     return_url: `${baseUrl}/checkout?step=3&id=${courseId}`,
+    //   },
+    //   redirect: "if_required",
+    // });
 
     const result = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: `${baseUrl}/checkout?step=3&id=${courseId}`,
+        return_url: `${process.env.NEXT_PUBLIC_STRIPE_REDIRECT_URL}?id=${courseId}`,
       },
       redirect: "if_required",
     });
@@ -57,7 +65,8 @@ const PaymentPageContent = () => {
         amount: course?.price || 0,
       };
 
-      await createTransaction(transactionData), navigateToStep(3);
+      await createTransaction(transactionData);
+      navigateToStep(3);
     }
   };
 

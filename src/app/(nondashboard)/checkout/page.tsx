@@ -10,6 +10,7 @@ import { WizardStepper } from "@/components/marketing/wizard-stepper";
 
 import PaymentPage from "./payment";
 import CheckoutDetailsPage from "./details";
+import CompletionPage from "./completion";
 
 const CheckoutWizard = () => {
   const { isLoaded } = useUser();
@@ -24,8 +25,7 @@ const CheckoutWizard = () => {
       case 2:
         return <PaymentPage />;
       case 3:
-        return <div>Completion Page</div>;
-      // return <CompletionPage />;
+        return <CompletionPage />;
       default:
         return <CheckoutDetailsPage />;
     }
