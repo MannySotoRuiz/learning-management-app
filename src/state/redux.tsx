@@ -56,6 +56,7 @@ export default function StoreProvider({
 }: {
   children: React.ReactNode;
 }) {
+  // @ts-expect-error: Expects one 1 param but it doesn't actually need it
   const storeRef = useRef<AppStore>();
   if (!storeRef.current) {
     storeRef.current = makeStore();

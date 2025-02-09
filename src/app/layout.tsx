@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Providers } from "./providers";
 import { DM_Sans } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Suspense } from "react";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -26,7 +27,9 @@ export default function RootLayout({
       <html lang="en" className="dark">
         <body className={`${dmSans.className}`}>
           <Providers>
-            <div className="root-layout">{children}</div>
+            <Suspense fallback={null}>
+              <div className="root-layout">{children}</div>
+            </Suspense>
             <Toaster richColors closeButton />
           </Providers>
         </body>
