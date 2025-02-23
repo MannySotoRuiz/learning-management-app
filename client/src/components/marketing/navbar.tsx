@@ -15,7 +15,7 @@ export const Navbar = () => {
       <div className="nondashboard-navbar__container">
         <div className="nondashboard-navbar__search">
           <Link href="/" className="nondashboard-navbar__brand" scroll={false}>
-            EDROH
+            EDU
           </Link>
           <div className="flex items-center gap-4">
             <div className="relative group">
